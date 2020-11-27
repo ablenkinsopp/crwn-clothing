@@ -24,7 +24,7 @@ const SignUp = () => {
 
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password)
-            await createUserProfileDocument( user, { displayName, from: 'signup' })
+            await createUserProfileDocument( user, { displayName })
             reset(INITIAL_STATE)
         } catch (error) {
             console.error(error)
