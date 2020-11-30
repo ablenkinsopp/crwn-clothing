@@ -7,14 +7,17 @@ import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component'
 import AuthPage from './pages/auth/auth.component';
+import CheckoutPage from './pages/checkout/checkout.component';
 
 import { setCurrentUser } from './redux/user/user.actions'
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+import { selectCurrentUser } from './redux/user/user.selectors';
+
 
 function App() {
     const dispatch = useDispatch()
-    const currentUser = useSelector(state => state.user.currentUser)
+    const currentUser = useSelector(selectCurrentUser)
 
     useEffect(() => {
         const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -51,6 +54,7 @@ function App() {
                         <AuthPage />
                     )
                 } />
+                <Route exact path='/checkout' component={CheckoutPage} />
             </Switch>
         </div>
     )
