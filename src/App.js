@@ -39,8 +39,6 @@ function App() {
         }
     }, [dispatch])
 
-    console.log('currentUser', currentUser)
-
     return (
         <div>
             <Header />
