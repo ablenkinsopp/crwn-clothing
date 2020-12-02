@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,7 +13,6 @@ import { setCurrentUser } from './redux/user/user.actions'
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { selectCurrentUser } from './redux/user/user.selectors';
-
 
 function App() {
     const dispatch = useDispatch()
