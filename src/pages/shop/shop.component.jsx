@@ -1,41 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import CollectionsOverview from '../../components/collections-overview/collections-overview.component'
-import CollectionPage from '../collection/collection.component';
-import WithSpinner from '../../components/with-spinner/with-spinner.component'
+import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
 
-import { convertCollectionsSnapshotToMap, firestore } from '../../firebase/firebase.utils'
-import { updateCollections } from '../../redux/shop/shop.actions';
-
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview)
-const CollectionPageWithSpinner = WithSpinner(CollectionPage)
+import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
+import CollectionPageContainer from '../collection/collection.container';
 
 const ShopPage = ({ match }) => {
-    const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const collectionRef = firestore.collection('collections')
-
-        collectionRef.onSnapshot(async snapshot => {
-            dispatch(updateCollections((convertCollectionsSnapshotToMap(snapshot))))
-            console.log('hello')
-            setIsLoading(false)
-        })
-    }, [dispatch, setIsLoading])
+        dispatch(fetchCollectionsStartAsync())
+    }, [])
 
     return (
         <div className='shop-page'>
             <Route 
                 exact 
                 path={`${match.path}`} 
-                render={props => <CollectionsOverviewWithSpinner match={props.match} isLoading={isLoading} />} 
+                component={CollectionsOverviewContainer}
             />
             <Route 
                 path={`${match.path}/:collectionId`} 
-                render={props => <CollectionPageWithSpinner match={props.match} isLoading={isLoading} />} 
+                component={CollectionPageContainer} 
             />
         </div>
         
