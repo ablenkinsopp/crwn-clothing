@@ -7,13 +7,6 @@ import CustomButton from '../custom-button/custom-button.component';
 import './sign-up.styles.scss';
 import { signUpStart } from '../../redux/user/user.actions';
 
-const INITIAL_STATE = {
-	displayName: '',
-	email: '',
-	password: '',
-	confirmPassword: '',
-};
-
 const SignUp = () => {
 	const { register, handleSubmit, reset } = useForm();
 	const dispatch = useDispatch();
