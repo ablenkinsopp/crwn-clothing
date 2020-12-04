@@ -8,7 +8,7 @@ import './sign-up.styles.scss';
 import { signUpStart } from '../../redux/user/user.actions';
 
 const SignUp = () => {
-	const { register, handleSubmit, reset } = useForm();
+	const { register, handleSubmit } = useForm();
 	const dispatch = useDispatch();
 
 	const onSubmit = async ({
