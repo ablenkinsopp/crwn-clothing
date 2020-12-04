@@ -1,5 +1,6 @@
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffectOnce } from 'react-use';
 
 import './App.css';
 import HomePage from './pages/homepage/homepage.component';
@@ -9,9 +10,15 @@ import AuthPage from './pages/auth/auth.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 
 import { selectCurrentUser } from './redux/user/user.selectors';
+import { checkUserSession } from './redux/user/user.actions';
 
 function App() {
 	const currentUser = useSelector(selectCurrentUser);
+	const dispatch = useDispatch();
+
+	useEffectOnce(() => {
+		dispatch(checkUserSession());
+	});
 
 	return (
 		<div>
